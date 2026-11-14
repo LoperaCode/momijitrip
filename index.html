@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japón Momiji 2.0 | Cuaderno de Ruta</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts para un toque acogedor -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Animación de fondo Momiji -->
+    <div class="momiji-container" id="momijiContainer"></div>
+
+    <!-- Cabecera Cozy -->
+    <header class="site-header">
+        <div class="header-content">
+            <span class="subtitle">秋の旅 • Edición Exclusiva 20.º Aniversario</span>
+            <h1>Ruta Momiji: Oeste & Kyushu</h1>
+            <p>20 días de ruta en coche • De Nagasaki a Kioto y regreso por el Norte</p>
+        </div>
+        <button id="toggleMomiji" class="btn-toggle-momiji" title="Pausar/Reanudar animación">🍁</button>
+    </header>
+
+    <!-- Panel de Progreso Global -->
+    <section class="progress-dashboard">
+        <div class="dashboard-card">
+            <h3>Progreso de Misiones Culturales</h3>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="globalProgressBar"></div>
+            </div>
+            <p><span id="completedCount">0</span> de 12 misiones completadas (<span id="progressPercent">0</span>%)</p>
+        </div>
+    </section>
+
+    <!-- Contenedor Principal del Itinerario -->
+    <main class="container">
+        
+        <!-- Tarjeta Día 1 -->
+        <article class="day-card" data-day="1">
+            <div class="day-header" onclick="toggleCard(this)">
+                <div class="day-badge">Día 01</div>
+                <div class="day-title-wrapper">
+                    <h2>Nagasaki: Luces de la Bahía y Memoria</h2>
+                    <span class="day-location">📍 Nagasaki (Kyushu)</span>
+                </div>
+                <span class="chevron">▼</span>
+            </div>
+            <div class="day-content">
+                <div class="info-grid">
+                    <div class="story-box">
+                        <h4>Historia y Contexto</h4>
+                        <p>Nagasaki fue durante siglos el único puerto abierto al comercio exterior durante el periodo de aislamiento nacional (*Sakoku*). Su mezcla única de arquitectura europea, templos chinos e historia cristiana la convierten en un inicio de viaje fascinante antes de adentrarnos en las carreteras de Kyushu.</p>
+                    </div>
+                    <div class="details-box">
+                        <div class="sleep-info">
+                            <strong>🛌 Dónde dormir:</strong> Ryokan tradicional con vistas al puerto en el barrio de Higashiyamate.
+                        </div>
+                        <div class="notes-area">
+                            <label for="note-1"><strong>Mis Notas y Reservas:</strong></label>
+                            <textarea id="note-1" class="user-notes" placeholder="Escribe aquí tus horarios de recogida de coche, restaurantes..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="missions-section">
+                    <h4>Misiones Culturales (Hanko)</h4>
+                    <div class="missions-grid">
+                        <div class="mission-item" onclick="toggleMission(this, 'd1-m1')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">1. Descubrir la historia de Dejima y el comercio holandés.</span>
+                        </div>
+                        <div class="mission-item" onclick="toggleMission(this, 'd1-m2')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">2. Probar el *Champon* o el *Castella* en la zona de Chinatown.</span>
+                        </div>
+                        <div class="mission-item" onclick="toggleMission(this, 'd1-m3')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">3. Visitar el Templo Sofukuji (arquitectura de la Dinastía Ming).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Tarjeta Día 2 -->
+        <article class="day-card" data-day="2">
+            <div class="day-header" onclick="toggleCard(this)">
+                <div class="day-badge">Día 02</div>
+                <div class="day-title-wrapper">
+                    <h2>Kumamoto: El Coloso del Gran Castillo</h2>
+                    <span class="day-location">📍 Kumamoto</span>
+                </div>
+                <span class="chevron">▼</span>
+            </div>
+            <div class="day-content">
+                <div class="info-grid">
+                    <div class="story-box">
+                        <h4>Historia y Contexto</h4>
+                        <p>Famosa por albergar uno de los tres castillos más imponentes de Japón y por su vibrante cultura samurái. Es la puerta de entrada ideal para empezar a rutear con el coche alquilado hacia el sur volcánico.</p>
+                    </div>
+                    <div class="details-box">
+                        <div class="sleep-info">
+                            <strong>🛌 Dónde dormir:</strong> Hotel céntrico cerca de la zona comercial de Shimotori.
+                        </div>
+                        <div class="notes-area">
+                            <label for="note-2"><strong>Mis Notas y Reservas:</strong></label>
+                            <textarea id="note-2" class="user-notes" placeholder="Escribe aquí tus notas..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="missions-section">
+                    <h4>Misiones Culturales (Hanko)</h4>
+                    <div class="missions-grid">
+                        <div class="mission-item" onclick="toggleMission(this, 'd2-m1')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">1. Admirar la reconstrucción del Castillo de Kumamoto.</span>
+                        </div>
+                        <div class="mission-item" onclick="toggleMission(this, 'd2-m2')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">2. Pasear por el jardín paisajístico Suizen-ji Jōju-en.</span>
+                        </div>
+                        <div class="mission-item" onclick="toggleMission(this, 'd2-m3')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">3. Degustar los fideos locales *Tai-meshi* o *Aka-ushi* (ternera).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Tarjeta Día 3 -->
+        <article class="day-card" data-day="3">
+            <div class="day-header" onclick="toggleCard(this)">
+                <div class="day-badge">Día 03</div>
+                <div class="day-title-wrapper">
+                    <h2>Yakushima: El Bosque Encantado de Mononoke</h2>
+                    <span class="day-location">📍 Isla de Yakushima</span>
+                </div>
+                <span class="chevron">▼</span>
+            </div>
+            <div class="day-content">
+                <div class="info-grid">
+                    <div class="story-box">
+                        <h4>Historia y Contexto</h4>
+                        <p>Declarada Patrimonio de la Humanidad, esta isla mística inspiró los paisajes de *La Princesa Mononoke* de Ghibli. Sus bosques de cedros milenarios (*yakusugi*) envueltos en bruma y musgo verde brillante ofrecen una experiencia espiritual única.</p>
+                    </div>
+                    <div class="details-box">
+                        <div class="sleep-info">
+                            <strong>🛌 Dónde dormir:</strong> Minshuku tradicional de madera cerca de Anbo.
+                        </div>
+                        <div class="notes-area">
+                            <label for="note-3"><strong>Mis Notas y Reservas:</strong></label>
+                            <textarea id="note-3" class="user-notes" placeholder="Escribe aquí tus notas..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="missions-section">
+                    <h4>Misiones Culturales (Hanko)</h4>
+                    <div class="missions-grid">
+                        <div class="mission-item" onclick="toggleMission(this, 'd3-m1')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">1. Recorrer la ruta de Shiratani Unsuikyo (Mononoke Hime forest).</span>
+                        </div>
+                        <div class="mission-item" onclick="toggleMission(this, 'd3-m2')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">2. Abrazar un *Yakusugi* de más de 1.000 años de antigüedad.</span>
+                        </div>
+                        <div class="mission-item" onclick="toggleMission(this, 'd3-m3')">
+                            <div class="hanko-stamp">達成</div>
+                            <span class="mission-text">3. Probar el licor de caña local *Mitake* junto a pescado fresco.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>Hecho con ❤️ para un viaje inolvidable a Japón • Versión 2.0</p>
+    </footer>
+
+    <!-- Archivo JavaScript separado -->
+    <script src="script.js"></script>
+</body>
+</html>
