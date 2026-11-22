@@ -3,32 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japón Momiji 2.0 | Cuaderno de Ruta</title>
+    <title>Mi cuaderno de viaje | Ruta Momiji 2028</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div class="momiji-container" id="momijiContainer"></div>
 
     <header class="site-header">
         <div class="header-content">
-            <h1>Ruta Momiji 2028</h1>
-            <p>20 días de ruta en coche • De Nagasaki a Kioto y regreso por el Norte</p>
+            <h1>Mi cuaderno de viaje</h1>
+            <p>Ruta Momiji 2028 • Tu aventura por Japón</p>
         </div>
-        <button id="toggleMomiji" class="btn-toggle-momiji">🍁</button>
-        <nav>
-            <a href="/login.html">Login</a>
-        </nav>
+        <div class="header-actions">
+            <a class="btn-top-action" href="index.html">← Ver itinerario</a>
+            <button id="signOutButton" class="btn-top-action" type="button" hidden>Cerrar sesión</button>
+            <button id="toggleMomiji" class="btn-top-action" aria-label="Activar o pausar la lluvia de hojas">🍁</button>
+        </div>
     </header>
 
-    
+    <main class="dashboard-main">
+        <section class="dashboard-welcome">
+            <div>
+                <p class="dashboard-eyebrow">TU CUADERNO PERSONAL</p>
+                <h2>Tu viaje, organizado a tu manera.</h2>
+                <p class="dashboard-user-email" id="dashboardUserEmail" hidden></p>
+                <p>Consulta tu progreso y vuelve a las notas que guardaste en cada destino.</p>
+            </div>
+            <a class="dashboard-primary-link" href="index.html#itineraryContainer">Explorar itinerario <span aria-hidden="true">→</span></a>
+        </section>
+
+        <p class="dashboard-storage-notice" id="dashboardStorageNotice" role="status">Conectando con tu cuenta...</p>
+
+        <section class="dashboard-stats" aria-label="Resumen del viaje">
+            <article class="dashboard-stat-card">
+                <span class="dashboard-stat-icon" aria-hidden="true">🗾</span>
+                <div>
+                    <p>Días de ruta</p>
+                    <strong id="dashboardDaysCount">0</strong>
+                </div>
+            </article>
+            <article class="dashboard-stat-card">
+                <span class="dashboard-stat-icon" aria-hidden="true">🍁</span>
+                <div>
+                    <p>Misiones completadas</p>
+                    <strong id="dashboardMissionsCount">0 / 0</strong>
+                </div>
+            </article>
+            <article class="dashboard-stat-card">
+                <span class="dashboard-stat-icon" aria-hidden="true">📝</span>
+                <div>
+                    <p>Notas guardadas</p>
+                    <strong id="dashboardNotesCount">0</strong>
+                </div>
+            </article>
+        </section>
+
+        <section class="dashboard-progress-card">
+            <div class="dashboard-section-heading">
+                <div>
+                    <p class="dashboard-eyebrow">TU AVANCE</p>
+                    <h2>Misiones culturales</h2>
+                </div>
+                <strong id="dashboardProgressPercent">0%</strong>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="dashboardProgressBar"></div>
+            </div>
+            <p id="dashboardProgressDescription">0 misiones completadas</p>
+            <p class="dashboard-local-disclaimer">El progreso de las misiones todavía se guarda solo en este navegador.</p>
+        </section>
+
+        <section class="dashboard-notes-section">
+            <div class="dashboard-section-heading">
+                <div>
+                    <p class="dashboard-eyebrow">TUS RECUERDOS</p>
+                    <h2>Mis notas</h2>
+                </div>
+                <a class="dashboard-secondary-link" href="index.html#itineraryContainer">＋ Añadir una nota</a>
+            </div>
+            <div class="dashboard-notes-grid" id="dashboardNotes" aria-live="polite">
+                <p class="dashboard-empty-state">Cargando tus notas...</p>
+            </div>
+        </section>
+    </main>
 
     <footer class="site-footer">
         <p>Hecho con 💚 por <a href="https://github.com/LoperaCode">LoperaCode</a></p>
     </footer>
 
-    <!-- Importante: Cargar primero los datos y luego la lógica -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>

@@ -19,6 +19,7 @@
             <p>20 días de ruta en coche • De Nagasaki a Kioto y regreso por el Norte</p>
         </div>
         <div class="header-actions">
+            <a href="dashboard.html" class="btn-top-action">📒 Mi cuaderno</a>
             <button id="openLoginModal" class="btn-top-action">👤 Acceso</button>
             <button id="toggleMomiji" class="btn-top-action">🍁</button>
         </div> 
@@ -49,7 +50,7 @@
         <div class="modal-box">
             <button class="close-modal" id="closeLoginModal">&times;</button>
             <h3>Cuaderno de Viaje • Acceso</h3>
-            <p>Inicia sesión para sincronizar tus misiones y notas en la nube.</p>
+            <p id="loginDescription">Entra en tu cuenta para guardar tus notas y consultarlas en otros dispositivos.</p>
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
                     <label for="userEmail">Correo electrónico</label>
@@ -57,14 +58,20 @@
                 </div>
                 <div class="form-group">
                     <label for="userPass">Contraseña</label>
-                    <input type="password" id="userPass" required placeholder="••••••••">
+                    <input type="password" id="userPass" required minlength="6" autocomplete="current-password" placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn-submit">Entrar a mi viaje</button>
+                <p class="auth-status" id="loginStatus" aria-live="polite"></p>
+                <button type="submit" class="btn-submit" id="authSubmit">Entrar a mi viaje</button>
+                <p class="auth-mode-switch">
+                    <span id="authModePrompt">¿No tienes cuenta?</span>
+                    <button id="toggleAuthMode" type="button">Crear cuenta</button>
+                </p>
             </form>
         </div>
     </div>
 
-    <!-- Importante: Cargar primero los datos y luego la lógica -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>

@@ -18,6 +18,7 @@
         </div>
         <div class="header-actions">
             <a class="btn-top-action" href="index.html">Volver al itinerario</a>
+            <a class="btn-top-action" href="dashboard.html">📒 Mi cuaderno</a>
             <button id="toggleMomiji" class="btn-top-action" aria-label="Activar o pausar la lluvia de hojas">🍁</button>
         </div>
     </header>
@@ -26,6 +27,21 @@
         <article class="destination-card" id="destinationDetails" aria-live="polite">
             <p>Buscando el destino...</p>
         </article>
+        <section class="destination-notes" id="destinationNotes" hidden>
+            <p class="dashboard-eyebrow">TU CUADERNO</p>
+            <h2>Mis notas para este día</h2>
+            <p class="destination-note-help">Guarda ideas, reservas o recuerdos de este destino.</p>
+            <p id="destinationNoteMessage" class="destination-note-message" aria-live="polite"></p>
+            <div id="destinationNoteEditor" hidden>
+                <label for="destinationNote">Tu nota</label>
+                <textarea id="destinationNote" rows="5" placeholder="Escribe aquí tu nota..."></textarea>
+                <div class="destination-note-actions">
+                    <button class="btn-submit" id="saveDestinationNote" type="button">Guardar nota</button>
+                    <button class="btn-note-delete" id="deleteDestinationNote" type="button">Borrar nota</button>
+                </div>
+                <p class="destination-note-status" id="destinationNoteStatus" aria-live="polite"></p>
+            </div>
+        </section>
         <!-- Sustituye cada div por <img class="destination-photo-placeholder" src="images/foto.jpg" alt="Descripción del lugar"> cuando añadas las fotos. -->
         <section class="destination-gallery" aria-label="Fotos del destino">
             <figure>
@@ -43,7 +59,8 @@
         <p>Hecho con 💚 por <a href="https://github.com/LoperaCode">LoperaCode</a></p>
     </footer>
 
-    <!-- Importante: Cargar primero los datos y luego la lógica -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
