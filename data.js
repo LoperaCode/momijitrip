@@ -1,5 +1,6 @@
 const viajeData = [
     {
+        id: "nagasaki",
         day: 1,
         title: "Nagasaki: La Puerta al Mundo",
         location: "Nagasaki",
@@ -12,6 +13,7 @@ const viajeData = [
         ]
     },
     {
+        id: "kumamoto",
         day: 2,
         title: "Rumbo a Kumamoto: Tierras Volcánicas",
         location: "Ruta Nagasaki - Kumamoto",
@@ -24,6 +26,7 @@ const viajeData = [
         ]
     },
     {
+        id: "kumamoto",
         day: 3,
         title: "Kumamoto: La Búsqueda de los Mugiwara",
         location: "Kumamoto",
@@ -36,6 +39,7 @@ const viajeData = [
         ]
     },
     {
+        id: "kagoshima",
         day: 4,
         title: "Kagoshima: Volcanes, Cascadas e Historia Satsuma",
         location: "Ruta Kumamoto - Kagoshima",
@@ -48,6 +52,7 @@ const viajeData = [
         ]
     },
     {
+        id: "yakushima",
         day: 5,
         title: "Yakushima: El Bosque Encantado de Mononoke",
         location: "Isla de Yakushima",
@@ -60,6 +65,7 @@ const viajeData = [
         ]
     },
     {
+        id: "aoshima",
         day: 6,
         title: "Aoshima y Takachiho: Mitos y Leyendas",
         location: "Ruta Sur - Miyazaki - Beppu",
@@ -72,6 +78,7 @@ const viajeData = [
         ]
     },
     {
+        id: "beppu",
         day: 7,
         title: "Beppu: El Vapor de los Siete Infiernos",
         location: "Beppu - Kitakyushu",
@@ -84,6 +91,7 @@ const viajeData = [
         ]
     },
     {
+        id: "miyajima",
         day: 8,
         title: "Miyajima: La Isla donde Conviven Dioses y Ciervos",
         location: "Isla de Miyajima (Itsukushima)",
@@ -96,6 +104,7 @@ const viajeData = [
         ]
     },
     {
+        id: "hiroshima",
         day: 9,
         title: "Hiroshima: Memoria, Resiliencia y Saltos entre Islas",
         location: "Hiroshima - Ruta Shimanami Kaido - Matsuyama",
@@ -108,6 +117,7 @@ const viajeData = [
         ]
     },
     {
+        id: "matsuyama",
         day: 10,
         title: "Matsuyama a Kochi: El Corazón Salvaje de Shikoku",
         location: "Matsuyama - Kochi",
@@ -120,6 +130,7 @@ const viajeData = [
         ]
     },
     {
+        id: "kochi",
         day: 11,
         title: "Kochi a Tokushima: Gargantas y Remolinos",
         location: "Kochi - Tokushima",
@@ -132,6 +143,7 @@ const viajeData = [
         ]
     },
     {
+        id: "tokushima",
         day: 12,
         title: "La Gran Travesía hacia la Antigua Capital",
         location: "Tokushima - Puente Akashi Kaikyo - Kioto",
@@ -144,6 +156,7 @@ const viajeData = [
         ]
     },
     {
+        id: "kioto",
         day: 13,
         title: "Kioto: Templos de Madera y Santuarios Infinitos",
         location: "Kioto",
@@ -156,6 +169,7 @@ const viajeData = [
         ]
     },
     {
+        id: "nagoya",
         day: 14,
         title: "Nagoya: El Imperio de los Unificadores",
         location: "Kioto - Nagoya",
@@ -168,6 +182,7 @@ const viajeData = [
         ]
     },
     {
+        id: "tottori",
         day: 15,
         title: "Tottori: El Desierto Frente al Mar de Japón",
         location: "Nagoya - Tottori",
@@ -180,6 +195,7 @@ const viajeData = [
         ]
     },
     {
+        id: "hamada",
         day: 16,
         title: "Hamada: La Costa Salvaje de San'in",
         location: "Tottori - Hamada (Prefectura de Shimane)",
@@ -192,6 +208,7 @@ const viajeData = [
         ]
     },
     {
+        id: "fukuoka",
         day: 17,
         title: "Fukuoka: Regreso a Kyushu y Cultura Yatai",
         location: "Hamada - Fukuoka",
@@ -204,6 +221,7 @@ const viajeData = [
         ]
     },
     {
+        id: "nagasaki",
         day: 18,
         title: "De Vuelta a Nagasaki: Cerrando el Círculo",
         location: "Fukuoka - Nagasaki",
@@ -216,6 +234,7 @@ const viajeData = [
         ]
     },
     {
+        id: "nagasaki",
         day: 19,
         title: "Nagasaki: Últimos Secretos de la Ciudad",
         location: "Nagasaki",
@@ -228,6 +247,7 @@ const viajeData = [
         ]
     },
     {
+        id: "nagasaki",
         day: 20,
         title: "Sayonara Japón: Vuelta a Casa",
         location: "Nagasaki - Aeropuerto",

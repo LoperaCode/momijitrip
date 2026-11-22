@@ -16,13 +16,28 @@
             <h1>Ruta Momiji 2028</h1>
             <p>20 días de ruta en coche • De Nagasaki a Kioto y regreso por el Norte</p>
         </div>
-        <button id="toggleMomiji" class="btn-toggle-momiji">🍁</button>
-        <nav>
-            <a href="/login.html">Login</a>
-        </nav>
+        <div class="header-actions">
+            <a class="btn-top-action" href="index.html">Volver al itinerario</a>
+            <button id="toggleMomiji" class="btn-top-action" aria-label="Activar o pausar la lluvia de hojas">🍁</button>
+        </div>
     </header>
 
-    
+    <main class="container destination-container">
+        <article class="destination-card" id="destinationDetails" aria-live="polite">
+            <p>Buscando el destino...</p>
+        </article>
+        <!-- Sustituye cada div por <img class="destination-photo-placeholder" src="images/foto.jpg" alt="Descripción del lugar"> cuando añadas las fotos. -->
+        <section class="destination-gallery" aria-label="Fotos del destino">
+            <figure>
+                <div class="destination-photo-placeholder">Hueco para la foto 1</div>
+                <figcaption>Foto 1 del destino</figcaption>
+            </figure>
+            <figure>
+                <div class="destination-photo-placeholder">Hueco para la foto 2</div>
+                <figcaption>Foto 2 del destino</figcaption>
+            </figure>
+        </section>
+    </main>
 
     <footer class="site-footer">
         <p>Hecho con 💚 por <a href="https://github.com/LoperaCode">LoperaCode</a></p>

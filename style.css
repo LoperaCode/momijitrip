@@ -238,23 +238,95 @@ body {
     margin-bottom: 1rem;
 }
 
-.notes-area label {
+.btn-destination {
     display: block;
-    font-size: 0.85rem;
-    margin-bottom: 0.3rem;
-    color: var(--text-main);
+    width: fit-content;
+    margin: 0 auto;
+    background: var(--primary-red);
+    color: white;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s;
 }
 
-.user-notes {
+.btn-destination:hover {
+    background: var(--primary-red-hover);
+}
+
+.destination-container {
+    margin-top: 2rem;
+}
+
+.destination-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.destination-photo-placeholder,
+.destination-gallery img {
     width: 100%;
-    height: 70px;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    font-family: inherit;
+    aspect-ratio: 4 / 3;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    background: #F4EFE6;
+    color: var(--text-muted);
+}
+
+.destination-photo-placeholder {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    text-align: center;
+}
+
+.destination-gallery img {
+    border-style: solid;
+    object-fit: cover;
+}
+
+.destination-gallery figcaption {
+    color: var(--text-muted);
     font-size: 0.85rem;
-    resize: vertical;
-    background: white;
+    margin-top: 0.4rem;
+    text-align: center;
+}
+
+.destination-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.destination-card h2 {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--primary-red);
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.destination-location,
+.destination-sleep {
+    color: var(--text-muted);
+}
+
+.destination-card h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    margin: 1.5rem 0 0.4rem;
+}
+
+.destination-sleep {
+    background: #F4EFE6;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
 }
 
 /* Misiones y Sellos Hanko */

@@ -44,10 +44,7 @@ function renderItinerary() {
                             <div class="sleep-info">
                                 <strong>🛌 Dónde dormir:</strong> ${dayData.sleep}
                             </div>
-                            <div class="notes-area">
-                                <label for="note-${dayNum}"><strong>Mis Notas y Reservas:</strong></label>
-                                <textarea id="note-${dayNum}" class="user-notes" data-note-id="note-${dayNum}" placeholder="Escribe aquí tus horarios de recogida, restaurantes..."></textarea>
-                            </div>
+                            <a class="btn-destination" href="destino.html?id=${encodeURIComponent(dayData.id)}&day=${dayNum}">Ver destino</a>
                         </div>
                     </div>
                     <div class="missions-section">
@@ -63,9 +60,8 @@ function renderItinerary() {
         container.innerHTML += cardHTML;
     });
 
-    // Una vez pintadas, actualizamos contadores y restauramos notas
+    // Una vez pintadas, actualizamos los contadores
     updateProgress();
-    restoreNotes();
 }
 
 // --- 2. LÓGICA DE ACORDEÓN ---
@@ -108,21 +104,40 @@ function updateProgress() {
     if (progressBarEl) progressBarEl.style.width = percent + '%';
 }
 
-// --- 4. GESTIÓN DE NOTAS CON LOCALSTORAGE ---
-function restoreNotes() {
-    document.querySelectorAll('.user-notes').forEach(textarea => {
-        const noteId = textarea.getAttribute('data-note-id');
-        const savedNote = localStorage.getItem(noteId);
-        
-        if (savedNote) {
-            textarea.value = savedNote;
-        }
+// --- 4. MOSTRAR EL DESTINO SELECCIONADO ---
+function renderDestination() {
+    const container = document.getElementById('destinationDetails');
+    if (!container) return;
 
-        // Guardar automáticamente al escribir
-        textarea.addEventListener('input', () => {
-            localStorage.setItem(noteId, textarea.value);
-        });
-    });
+    const params = new URLSearchParams(window.location.search);
+    const destinationId = params.get('id');
+    const day = Number(params.get('day'));
+    const destination = viajeData.find(item => item.id === destinationId && item.day === day);
+
+    if (!destination) {
+        container.textContent = 'No encontramos ese destino. Vuelve al itinerario e inténtalo de nuevo.';
+        return;
+    }
+
+    const title = document.createElement('h2');
+    title.textContent = destination.title;
+
+    const location = document.createElement('p');
+    location.className = 'destination-location';
+    location.textContent = `📍 ${destination.location}`;
+
+    const storyTitle = document.createElement('h3');
+    storyTitle.textContent = 'Historia y contexto';
+
+    const story = document.createElement('p');
+    story.textContent = destination.story;
+
+    const sleep = document.createElement('p');
+    sleep.className = 'destination-sleep';
+    sleep.textContent = `🛌 Dónde dormir: ${destination.sleep}`;
+
+    container.replaceChildren(title, location, storyTitle, story, sleep);
+    document.title = `${destination.title} | Ruta Momiji 2028`;
 }
 
 // --- 5. ANIMACIÓN DE HOJAS MOMIJI ---
@@ -160,6 +175,7 @@ function initMomijiRain() {
 // Inicializar todo al cargar la página
 window.addEventListener('DOMContentLoaded', () => {
     renderItinerary();
+    renderDestination();
     initMomijiRain();
 
     const toggleBtn = document.getElementById('toggleMomiji');
