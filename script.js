@@ -331,24 +331,7 @@ async function renderDashboard() {
     }
     if (notice) notice.textContent = 'Tus notas están sincronizadas con tu cuenta de Supabase.';
 
-    if (signOutButton) {
-        signOutButton.hidden = false;
-        signOutButton.addEventListener('click', async () => {
-            signOutButton.disabled = true;
-            try {
-                const { error } = await client.auth.signOut();
-                if (error) {
-                    if (notice) notice.textContent = error.message;
-                    signOutButton.disabled = false;
-                    return;
-                }
-                window.location.href = 'index.html';
-            } catch (error) {
-                if (notice) notice.textContent = getUnexpectedErrorMessage(error, 'No se pudo cerrar la sesión.');
-                signOutButton.disabled = false;
-            }
-        });
-    }
+    if (signOutButton) signOutButton.hidden = false;
 
     let notes;
     try {
@@ -416,6 +399,36 @@ function showDashboardMessage(container, text) {
     container.appendChild(message);
 }
 
+function setupDashboardSignOut() {
+    const button = document.getElementById('signOutButton');
+    if (!button) return;
+
+    button.addEventListener('click', async () => {
+        const client = window.supabaseClient;
+        const notice = document.getElementById('dashboardStorageNotice');
+        if (!client) {
+            if (notice) notice.textContent = getSupabaseSetupMessage();
+            return;
+        }
+
+        button.disabled = true;
+        if (notice) notice.textContent = 'Cerrando sesión...';
+
+        try {
+            const { error } = await client.auth.signOut({ scope: 'local' });
+            if (error) {
+                if (notice) notice.textContent = error.message;
+                button.disabled = false;
+                return;
+            }
+            window.location.replace('index.html');
+        } catch (error) {
+            if (notice) notice.textContent = getUnexpectedErrorMessage(error, 'No se pudo cerrar la sesión.');
+            button.disabled = false;
+        }
+    });
+}
+
 // --- 6. ANIMACIÓN DE HOJAS MOMIJI ---
 let momijiActive = true;
 
@@ -455,6 +468,8 @@ window.addEventListener('DOMContentLoaded', () => {
     renderDashboard();
     initMomijiRain();
     setupAuthMode();
+    setupAccessButton();
+    setupDashboardSignOut();
 
     const toggleBtn = document.getElementById('toggleMomiji');
     if (toggleBtn) {
@@ -515,6 +530,40 @@ if (authModeToggle) {
 function setupAuthMode() {
     const shouldOpenLogin = new URLSearchParams(window.location.search).get('login') === '1';
     if (shouldOpenLogin && loginModal) loginModal.classList.add('active');
+}
+
+async function setupAccessButton() {
+    if (!openLoginBtn) return;
+
+    const client = window.supabaseClient;
+    if (!client) {
+        openLoginBtn.hidden = false;
+        return;
+    }
+
+    let authEventReceived = false;
+    const updateButton = (session) => {
+        authEventReceived = true;
+        openLoginBtn.hidden = Boolean(session);
+        if (session && loginModal) loginModal.classList.remove('active');
+    };
+
+    client.auth.onAuthStateChange((_event, session) => {
+        updateButton(session);
+    });
+
+    try {
+        const { data, error } = await client.auth.getSession();
+        if (error) {
+            console.error('No se pudo comprobar la sesión de Supabase:', error.message);
+            if (!authEventReceived) openLoginBtn.hidden = false;
+            return;
+        }
+        if (!authEventReceived) updateButton(data.session);
+    } catch (error) {
+        console.error('No se pudo comprobar la sesión de Supabase:', error);
+        if (!authEventReceived) openLoginBtn.hidden = false;
+    }
 }
 
 async function handleLogin(event) {
