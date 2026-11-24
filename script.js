@@ -299,7 +299,7 @@ async function renderDashboard() {
 
     const client = window.supabaseClient;
     if (!client) {
-        if (notice) notice.textContent = getSupabaseSetupMessage();
+        setDashboardNotice(notice, getSupabaseSetupMessage());
         if (notesCount) notesCount.textContent = '0';
         showDashboardMessage(notesContainer, 'Configura Supabase para cargar las notas de tu cuenta.');
         return;
@@ -309,13 +309,13 @@ async function renderDashboard() {
     try {
         const { data, error } = await client.auth.getSession();
         if (error) {
-            if (notice) notice.textContent = error.message;
+            setDashboardNotice(notice, error.message);
             showDashboardMessage(notesContainer, `No se pudo comprobar la sesión: ${error.message}`);
             return;
         }
         session = data.session;
     } catch (error) {
-        if (notice) notice.textContent = getUnexpectedErrorMessage(error, 'No se pudo comprobar la sesión.');
+        setDashboardNotice(notice, getUnexpectedErrorMessage(error, 'No se pudo comprobar la sesión.'));
         showDashboardMessage(notesContainer, 'No se pudo comprobar la sesión.');
         return;
     }
@@ -329,7 +329,6 @@ async function renderDashboard() {
         userEmail.textContent = session.user.email || '';
         userEmail.hidden = !session.user.email;
     }
-    if (notice) notice.textContent = 'Tus notas están sincronizadas con tu cuenta de Supabase.';
 
     if (signOutButton) signOutButton.hidden = false;
 
@@ -340,14 +339,14 @@ async function renderDashboard() {
             .select('day, destination_id, content')
             .order('day');
         if (error) {
-            if (notice) notice.textContent = `No se pudieron cargar las notas: ${error.message}`;
+            setDashboardNotice(notice, `No se pudieron cargar las notas: ${error.message}`);
             showDashboardMessage(notesContainer, `No se pudieron cargar las notas: ${error.message}`);
             return;
         }
         notes = data;
     } catch (error) {
         const message = getUnexpectedErrorMessage(error, 'No se pudieron cargar las notas.');
-        if (notice) notice.textContent = message;
+        setDashboardNotice(notice, message);
         showDashboardMessage(notesContainer, message);
         return;
     }
@@ -399,6 +398,12 @@ function showDashboardMessage(container, text) {
     container.appendChild(message);
 }
 
+function setDashboardNotice(notice, message) {
+    if (!notice) return;
+    notice.textContent = message;
+    notice.hidden = !message;
+}
+
 function setupDashboardSignOut() {
     const button = document.getElementById('signOutButton');
     if (!button) return;
@@ -407,23 +412,23 @@ function setupDashboardSignOut() {
         const client = window.supabaseClient;
         const notice = document.getElementById('dashboardStorageNotice');
         if (!client) {
-            if (notice) notice.textContent = getSupabaseSetupMessage();
+            setDashboardNotice(notice, getSupabaseSetupMessage());
             return;
         }
 
         button.disabled = true;
-        if (notice) notice.textContent = 'Cerrando sesión...';
+        setDashboardNotice(notice, 'Cerrando sesión...');
 
         try {
             const { error } = await client.auth.signOut({ scope: 'local' });
             if (error) {
-                if (notice) notice.textContent = error.message;
+                setDashboardNotice(notice, error.message);
                 button.disabled = false;
                 return;
             }
             window.location.replace('index.html');
         } catch (error) {
-            if (notice) notice.textContent = getUnexpectedErrorMessage(error, 'No se pudo cerrar la sesión.');
+            setDashboardNotice(notice, getUnexpectedErrorMessage(error, 'No se pudo cerrar la sesión.'));
             button.disabled = false;
         }
     });
@@ -592,7 +597,13 @@ async function handleLogin(event) {
             });
 
         if (result.error) {
-            if (status) status.textContent = result.error.message;
+            const isInvalidCredentials = result.error.code === 'invalid_credentials'
+                || result.error.message === 'Invalid login credentials';
+            if (status) {
+                status.textContent = isInvalidCredentials
+                    ? 'El correo o la contraseña no son correctos.'
+                    : result.error.message;
+            }
             return;
         }
 
